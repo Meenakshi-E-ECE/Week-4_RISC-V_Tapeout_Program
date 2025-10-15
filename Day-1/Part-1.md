@@ -1,10 +1,6 @@
-# CMOS Circuit Design & SPICE Simulation Workshop
+# Day-1 Basics of NMOS Drain(id) Vs Drain-to-source Voltage(Vds)
 
 > A comprehensive guide to understanding CMOS transistor behavior, circuit analysis, and practical SPICE simulation using Sky130 technology.
-
-[![GitHub](https://img.shields.io/badge/GitHub-Repository-blue?logo=github)](https://github.com/yourusername/cmos-spice-workshop)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Stars](https://img.shields.io/github/stars/yourusername/cmos-spice-workshop?style=social)](https://github.com/yourusername/cmos-spice-workshop/stargazers)
 
 ---
 
@@ -15,9 +11,7 @@
 - [Module 2: NMOS Transistor Physics](#module-2-nmos-transistor-physics)
 - [Module 3: Hands-on SPICE Simulation](#module-3-hands-on-spice-simulation)
 - [Getting Started](#getting-started)
-- [Repository Structure](#repository-structure)
-- [Resources](#resources)
-- [Contributing](#contributing)
+
 
 ---
 
@@ -133,30 +127,6 @@ For gate G1 driving gates G2, G3, and G4 through an interconnect network:
 C_total(G1) = C_out(G1) + C_in(G2) + C_in(G3) + C_in(G4) 
               + C_wire1 + C_wire2 + C_wire3 + C_wire4
 ```
-
-#### Delay Interpolation Technique
-
-When required conditions fall between LUT entries, use linear interpolation:
-
-<p align="center">
-  <img src="assets/images/delay_interpolation_method.png" alt="Delay Interpolation" width="550"/>
-  <br>
-  <em>Figure 5: Linear Interpolation for Delay Calculation</em>
-</p>
-
-**Given:** Input slew = 40ps, Output load = 60fF  
-**LUT contains:** Delays at 50fF (x9) and 70fF (x10)
-
-**Interpolation Formula:**
-
-```
-Delay@60fF = x9 + [(60fF - 50fF) / (70fF - 50fF)] × (x10 - x9)
-           = x9 + [10fF / 20fF] × (x10 - x9)
-           = x9 + 0.5 × (x10 - x9)
-```
-
-⚠️ **Important**: Extrapolation beyond table boundaries yields less accurate results. Design within characterized ranges whenever possible.
-
 ---
 
 ## Module 2: NMOS Transistor Physics
@@ -182,6 +152,12 @@ An NMOS transistor consists of four terminals:
   <br>
   <em>Figure 7: NMOS Transistor Operating Regions</em>
 </p>
+
+>V_GS - Gate Voltage  
+>V_th - Threshold Voltage
+
+**What is Surface Inversion ?**
+- Surface inversion means the surface of the p-type substrate gets inverted to n-type due to a strong positive gate voltage.
 
 **Cut-off (V_GS < V_th):**
 - No inversion channel exists
@@ -540,31 +516,6 @@ cmos-spice-workshop/
     └── advanced_topics.md
 ```
 
-### 📸 Image Guidelines
-
-**To add images to your repository:**
-
-1. **Create the assets directory:**
-   ```bash
-   mkdir -p assets/images
-   ```
-
-2. **Add your images:**
-   ```bash
-   cp your_image.png assets/images/
-   ```
-
-3. **Reference in Markdown:**
-   ```markdown
-   ![Alt Text](assets/images/your_image.png)
-   
-   # Or with centered alignment and caption:
-   <p align="center">
-     <img src="assets/images/your_image.png" alt="Description" width="600"/>
-     <br>
-     <em>Figure X: Your caption here</em>
-   </p>
-   ```
 
 4. **Image naming convention:**
    - Use lowercase with underscores: `nmos_iv_curves.png`
@@ -616,60 +567,3 @@ cmos-spice-workshop/
 - **Original Workshop**: [VSD Hardware Design Program](https://github.com/kunalg123/sky130CircuitDesignWorkshop)
 
 ---
-
-## Contributing
-
-We welcome contributions! Here's how you can help:
-
-1. **Fork the repository**
-2. **Create a feature branch:**
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-3. **Make your changes and commit:**
-   ```bash
-   git commit -am "Add new simulation example"
-   ```
-4. **Push to your fork:**
-   ```bash
-   git push origin feature/your-feature-name
-   ```
-5. **Submit a Pull Request**
-
-### Contribution Guidelines
-
-- Follow the existing code style and formatting
-- Add documentation for new simulations
-- Include example outputs/waveforms
-- Update the README if adding new features
-- Test your SPICE netlists before submitting
-
----
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## Acknowledgments
-
-- **VSD Corp** for the original workshop content
-- **SkyWater Technology** for the open-source PDK
-- **UC Berkeley** for developing SPICE
-- All contributors to this repository
-
----
-
-## Contact
-
-- **Issues**: [GitHub Issues](https://github.com/yourusername/cmos-spice-workshop/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/cmos-spice-workshop/discussions)
-
----
-
-<p align="center">
-  Made with ❤️ for the VLSI community
-  <br>
-  <strong>Happy Simulating! 🚀</strong>
-</p>
