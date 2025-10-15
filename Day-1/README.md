@@ -47,7 +47,7 @@ SPICE (Simulation Program with Integrated Circuit Emphasis) serves as the backbo
 The CMOS inverter represents the fundamental building block of digital circuits. Its operation demonstrates complementary transistor behavior:
 
 <p align="center">
-  <img src="assets/images/cmos_inverter_schematic.png" alt="CMOS Inverter Circuit" width="600"/>
+  <img src="assets/images/cmos_inverter.png" alt="CMOS Inverter Circuit" width="600"/>
   <br>
   <em>Figure 1: CMOS Inverter Circuit Diagram</em>
 </p>
@@ -65,16 +65,6 @@ The CMOS inverter represents the fundamental building block of digital circuits.
 | LOW (0V) | Conducting | Cut-off | HIGH (VDD) | VDD → PMOS → Output |
 | HIGH (VDD) | Cut-off | Conducting | LOW (0V) | Output → NMOS → GND |
 
-#### Simulation Outputs
-
-SPICE generates two critical characteristics:
-
-<p align="center">
-  <img src="assets/images/inverter_iv_vtc_curves.png" alt="Inverter Characteristics" width="700"/>
-  <br>
-  <em>Figure 2: CMOS Inverter I-V and VTC Characteristics</em>
-</p>
-
 1. **Current-Voltage (I-V) Curves**: Shows drain current vs. output voltage across different input conditions
 2. **Voltage Transfer Characteristic (VTC)**: Maps input voltage to output voltage, revealing noise margins and switching threshold
 
@@ -91,21 +81,10 @@ Modern timing libraries use 2D lookup tables indexed by:
 - **Output Load**: Capacitive loading at the output pin
 
 <p align="center">
-  <img src="assets/images/delay_lut_structure.png" alt="Delay LUT Structure" width="650"/>
+  <img src="assets/images/delay_table.png" alt="Delay LUT Structure" width="650"/>
   <br>
   <em>Figure 3: Delay Lookup Table Organization</em>
 </p>
-
-**Example LUT Structure:**
-
-```
-Input Slew ↓ | 10fF  | 30fF  | 50fF  | 70fF  | 90fF  | 110fF |
--------------|-------|-------|-------|-------|-------|-------|
-20ps         | x1    | x2    | x3    | x4    | x5    | x6    |
-40ps         | x7    | x8    | x9    | x10   | x11   | x12   |
-60ps         | x13   | x14   | x15   | x16   | x17   | x18   |
-80ps         | x19   | x20   | x21   | x22   | x23   | x24   |
-```
 
 #### Calculating Total Output Capacitance
 
@@ -140,7 +119,7 @@ An NMOS transistor consists of four terminals:
 - **Bulk/Body (B)**: Substrate connection
 
 <p align="center">
-  <img src="assets/images/nmos_structure_diagram.png" alt="NMOS Structure" width="500"/>
+  <img src="assets/images/nmos_structure.png" alt="NMOS Structure" width="500"/>
   <br>
   <em>Figure 6: NMOS Transistor Physical Structure</em>
 </p>
