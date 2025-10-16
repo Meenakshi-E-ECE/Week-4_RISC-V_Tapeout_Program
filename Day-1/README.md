@@ -47,7 +47,7 @@ SPICE (Simulation Program with Integrated Circuit Emphasis) serves as the backbo
 The CMOS inverter represents the fundamental building block of digital circuits. Its operation demonstrates complementary transistor behavior:
 
 <p align="center">
-  <img src="assets/images/cmos_inverter_schematic.png" alt="CMOS Inverter Circuit" width="600"/>
+  <img src="Images/cmos_inverter.png" alt="CMOS Inverter Circuit" width="600"/>
   <br>
   <em>Figure 1: CMOS Inverter Circuit Diagram</em>
 </p>
@@ -70,7 +70,7 @@ The CMOS inverter represents the fundamental building block of digital circuits.
 SPICE generates two critical characteristics:
 
 <p align="center">
-  <img src="assets/images/inverter_iv_vtc_curves.png" alt="Inverter Characteristics" width="700"/>
+  <img src="Images/vtc_char.png" alt="Inverter Characteristics" width="700"/>
   <br>
   <em>Figure 2: CMOS Inverter I-V and VTC Characteristics</em>
 </p>
@@ -91,33 +91,16 @@ Modern timing libraries use 2D lookup tables indexed by:
 - **Output Load**: Capacitive loading at the output pin
 
 <p align="center">
-  <img src="assets/images/delay_lut_structure.png" alt="Delay LUT Structure" width="650"/>
+  <img src="Images/delay_table.png" alt="Delay LUT Structure" width="650"/>
   <br>
   <em>Figure 3: Delay Lookup Table Organization</em>
 </p>
-
-**Example LUT Structure:**
-
-```
-Input Slew ↓ | 10fF  | 30fF  | 50fF  | 70fF  | 90fF  | 110fF |
--------------|-------|-------|-------|-------|-------|-------|
-20ps         | x1    | x2    | x3    | x4    | x5    | x6    |
-40ps         | x7    | x8    | x9    | x10   | x11   | x12   |
-60ps         | x13   | x14   | x15   | x16   | x17   | x18   |
-80ps         | x19   | x20   | x21   | x22   | x23   | x24   |
-```
 
 #### Calculating Total Output Capacitance
 
 When a gate drives multiple fanouts, compute total capacitance as:
 
 **C_total = C_pin_output + Σ(C_pin_input_fanouts) + Σ(C_wire_segments)**
-
-<p align="center">
-  <img src="assets/images/capacitance_calculation_example.png" alt="Capacitance Calculation" width="600"/>
-  <br>
-  <em>Figure 4: Total Capacitance Calculation for Multi-Fanout Scenario</em>
-</p>
 
 **Practical Scenario:**
 
@@ -140,18 +123,12 @@ An NMOS transistor consists of four terminals:
 - **Bulk/Body (B)**: Substrate connection
 
 <p align="center">
-  <img src="assets/images/nmos_structure_diagram.png" alt="NMOS Structure" width="500"/>
+  <img src="Images/nmos_structure.png" alt="NMOS Structure" width="500"/>
   <br>
   <em>Figure 6: NMOS Transistor Physical Structure</em>
 </p>
 
 #### Operating Regions
-
-<p align="center">
-  <img src="assets/images/nmos_operating_regions.png" alt="NMOS Operating Regions" width="700"/>
-  <br>
-  <em>Figure 7: NMOS Transistor Operating Regions</em>
-</p>
 
 >V_GS - Gate Voltage  
 >V_th - Threshold Voltage
@@ -174,20 +151,10 @@ An NMOS transistor consists of four terminals:
 - Current relatively independent of V_DS
 - Current proportional to (V_GS - V_th)²
 
-### Body Effect (Substrate Bias)
-
-When source and body voltages differ (V_SB > 0), the threshold voltage increases:
-
-<p align="center">
-  <img src="assets/images/body_effect_comparison.png" alt="Body Effect" width="650"/>
-  <br>
-  <em>Figure 8: Body Effect on Threshold Voltage</em>
-</p>
-
 **Modified Threshold Voltage:**
 
 <p align="center">
-  <img src="assets/images/body_effect_equation.png" alt="Body Effect Equation" width="400"/>
+  <img src="Images/threshold_eqn.png" alt="Body Effect Equation" width="400"/>
 </p>
 
 ```
@@ -218,12 +185,6 @@ When V_GS < V_th:
 
 #### Linear Region Model
 
-<p align="center">
-  <img src="assets/images/nmos_linear_region.png" alt="Linear Region Operation" width="600"/>
-  <br>
-  <em>Figure 9: NMOS Operating in Linear Region</em>
-</p>
-
 ```
 When V_GS > V_th and V_DS small:
 ├── Strong inversion channel exists
@@ -237,12 +198,6 @@ I_D = µ_n × C_ox × (W/L) × [(V_GS - V_th)×V_DS - V_DS²/2]
 ```
 
 #### Saturation Region Model
-
-<p align="center">
-  <img src="assets/images/nmos_saturation_region.png" alt="Saturation Region Operation" width="600"/>
-  <br>
-  <em>Figure 10: NMOS Operating in Saturation Region (Pinch-off)</em>
-</p>
 
 ```
 When V_DS ≥ V_GS - V_th:
@@ -266,12 +221,6 @@ Where:(Fixed Constants)
 
 Current flow results from electric field-induced carrier drift:
 
-<p align="center">
-  <img src="assets/images/drift_current_illustration.png" alt="Drift Current" width="550"/>
-  <br>
-  <em>Figure 11: Drift Current Mechanism in NMOS Channel</em>
-</p>
-
 **Drift Velocity:**
 ```
 v_drift = μ_n × E_field
@@ -294,7 +243,7 @@ This forms the foundation for deriving transistor current equations from first p
 VLSI design tools operate at multiple abstraction levels:
 
 <p align="center">
-  <img src="assets/images/simulation_hierarchy.png" alt="Simulation Hierarchy" width="650"/>
+  <img src="Images/spice_working.png" alt="Simulation Hierarchy" width="650"/>
   <br>
   <em>Figure 12: VLSI Design Simulation Hierarchy</em>
 </p>
@@ -334,11 +283,18 @@ R<n> <node1> <node2> <resistance>
 ```spice
 V<n> <positive_node> <negative_node> <DC_value>
 ```
-# add a image  of syntax for netlist 
+
+<p align="center">
+  <img src="Images/example_for_spice_netlist_syntax.png" alt="Spice Netlist Syntax Example" width="500"/>
+  <br>
+  <em>Figure 13: Spice Netlist Syntax Example
+  </em>
+</p>
+
 #### Example: NMOS Characterization Circuit
 
 <p align="center">
-  <img src="assets/images/nmos_test_circuit.png" alt="NMOS Test Circuit" width="500"/>
+  <img src="Images/nmos_inverter.png" alt="NMOS Test Circuit" width="500"/>
   <br>
   <em>Figure 13: NMOS Characterization Test Circuit</em>
 </p>
@@ -393,7 +349,13 @@ mkdir -p SPICE
 git clone https://github.com/kunalg123/sky130CircuitDesignWorkshop.git
 cd sky130CircuitDesignWorkshop
 ```
-# add a image of git clone pic
+
+<p align="center">
+  <img src="Images/git_clone.png" alt="Git Clone" width="500"/>
+  <br>
+  <em>Figure 13: Git Clone
+  </em>
+</p>
 
 ### Structure
 ```
@@ -452,6 +414,14 @@ SPICE/
 # Ubuntu/Debian
 sudo apt-get update
 sudo apt-get install ngspice
+```
+
+<p align="center">
+  <img src="Images/ngspice_install.png" alt="NGSPICE Installation" width="500"/>
+  <br>
+  <em>Figure 13: NGSPICE Installation
+  </em>
+</p>
 
 ### Running Your First Simulation
 
@@ -509,10 +479,10 @@ plot -vdd#branch
 .end
 ```
 
-**Expected Output:**
+**Output:**
 
 <p align="center">
-  <img src="assets/images/nmos_iv_simulation_result.png" alt="NMOS I-V Curves" width="700"/>
+  <img src="Images/iv_waveform.png" alt="NMOS I-V Curves" width="700"/>
   <br>
   <em>Figure 14: Simulated NMOS I-V Characteristics (W=5µm, L=2µm, Sky130)</em>
 </p>
